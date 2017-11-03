@@ -2,30 +2,34 @@ const sqlite3 = require('sqlite3').verbose(),
       Sequelize = require('sequelize'),
       request = require('request'),
       express = require('express'),
-      Promise = require("bluebird");
+      Promise = require("bluebird"),
+      async = require('asyncawait/async'),
+      await = require('asyncawait/await'),
+      fs = Promise.promisifyAll(require('fs')); // adds Async() versions that return promises
+
 const { PORT=3000, NODE_ENV='development', DB_PATH='./db/database.db' } = process.env;
 
 var db = new sqlite3.Database('./db/database.db');
       
 app = express();
 
+
 // ROUTES
-app.get('/films/:id/recommendations', getFilmRecommendations)
+app.get('/films/:id/recommendations',  getFilmRecommendations);
 
   // get the one result genre
   // then call db to get other films of same genre
   // then call the 3rd party for each film
   // filter on >5 reviews, >4 stars and add to list
   //  return the resulting object
-function getFilmRecommendations(req, res, next) {
+async function getFilmRecommendations(req, res, next) {
   // "10302";
   let id = req.params.id;
-  relatedFilms = [makeDBcall(id)];
-  filterOutFilms();
-  res.json("results:");
+  let relatedFilms = await [makeDBcall(id)];
+  res.json(await filterOutFilms(relatedFilms));
 };
 
-function makeDBcall(id){
+async function makeDBcall(id){
   console.log("PRINTING ID:" + id)
   let sql = `SELECT "id" FROM films WHERE "genre_id" = (SELECT "genre_id" FROM films WHERE "id" = ?)`;
         
@@ -37,10 +41,10 @@ function makeDBcall(id){
     });
   
   db.close();
-}
+};
 
-function filterOutFilms(){
-
+async function filterOutFilms(relatedFilmsArray){
+return "response"
 };
 
 // START SERVER

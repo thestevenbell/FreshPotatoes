@@ -4,7 +4,6 @@
   "description": "Your freshest place for film-related data",
   "main": "index.js",
   "scripts": {
-    "preinstall": "node -v | grep v6 || (echo 'Please update Node.js to v6. Other versions are not supported' && exit 1)",
     "start": "nodemon --ignore spec/ index.js",
     "test": "NODE_ENV=test PORT=3333 mocha --recursive --reporter spec",
     "build": "babel ./ -d lib"
@@ -12,14 +11,13 @@
   "author": "GA Credentials",
   "license": "CC­BY­NC­SA 4.0, GNU GPLv3",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
     "chai": "^3.5.0",
     "mocha": "^3.2.0",
     "nodemon": "^1.11.0",
     "supertest": "^2.0.1"
   },
   "dependencies": {
+    "asyncawait": "^1.0.6",
     "bluebird": "^3.5.1",
     "express": "^4.14.0",
     "request": "^2.79.0",
