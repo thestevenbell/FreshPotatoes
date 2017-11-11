@@ -18,11 +18,14 @@ app = express();
 // ROUTES
 app.get('/films/:id/recommendations',  getFilmRecommendations);
 
+  // STEPS: 
   // get the one result genre
   // then call db to get other films of same genre
   // then call the 3rd party for each film
   // filter on >5 reviews, >4 stars and add to list
+  // take list and then call db again to get the additional missing fields
   //  return the resulting object
+  
 async function getFilmRecommendations(req, res, next) {
   // "10302";
   let id = req.params.id;
