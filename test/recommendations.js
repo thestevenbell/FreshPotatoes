@@ -1,6 +1,6 @@
 /* eslint-disable quotes */
 
-const app = require('../index.js');
+const app = require('../lib/index.js');
 const request = require('supertest')(app);
 const expect = require('chai').expect;
 

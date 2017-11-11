@@ -4,19 +4,24 @@
   "description": "Your freshest place for film-related data",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --ignore spec/ index.js",
+    "start": "nodemon --ignore spec/ lib/index.js",
     "test": "NODE_ENV=test PORT=3333 mocha --recursive --reporter spec",
     "preinstall": "node -v | grep v6 || (echo 'Please update Node.js to v6. Other versions are not supported' && exit 1)",
-    "build": "babel ./ -d lib"
+    "build": "babel index.js --out-file lib/index.js --source-maps --watch",
+    "debug": "node --inspect --debug-brk lib/index.js",
+    "inspect": "inspect --debug-brk lib/index.js"
   },
   "author": "GA Credentials",
   "license": "CC­BY­NC­SA 4.0, GNU GPLv3",
   "devDependencies": {
+    "babel-cli": "^6.0.0",
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-es2015-arrow-functions": "^6.22.0",
+    "babel-preset-env": "^1.6.1",
     "chai": "^3.5.0",
     "mocha": "^3.2.0",
     "nodemon": "^1.11.0",
-    "supertest": "^2.0.1",  
-    "babel-cli": "^6.0.0"
+    "supertest": "^2.0.1"
   },
   "dependencies": {
     "asyncawait": "^1.0.6",
@@ -31,4 +36,3 @@
     "node": ">= 6.8.1"
   }
 }
-
